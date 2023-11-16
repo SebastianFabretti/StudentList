@@ -1,0 +1,63 @@
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Dni</th>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let student of studentList'>
+            <td>{{ student.id }}</td>
+            <td>{{ student.dni }}</td>
+            <td>{{ student.lastName }}</td>
+            <td>{{ student.firstName }}</td>
+            <td>{{ student.email }}</td>
+            <td><button class="btn btn-success btn-sm" (click)="view(ver, student)">Ver</button></td>
+            <td><button class="btn btn-danger btn-sm" (click)="delete(student.id)">Borrar</button></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5">
+                <form [formGroup]="studentForm">
+                    <input class="form-control" formControlName="dni" placeholder="DNI">
+                    <p *ngIf="dni.touched && dni.errors?.required" style="color: red">*campo obligatorio</p><br>
+                    <input class="form-control" formControlName="lastName" placeholder="Last Name">
+                    <p *ngIf="lastName.touched && lastName.errors?.required" style="color: red">*campo obligatorio</p><br>
+                    <input class="form-control" formControlName="firstName" placeholder="First Name">
+                    <p *ngIf="firstName.touched && firstName.errors?.required" style="color: red">*campo obligatorio</p><br>
+                    <input class="form-control" formControlName="email" placeholder="Email">
+                    <p *ngIf="email.touched && email.errors?.required" style="color: red">*campo obligatorio</p><br>
+                    <div style="text-align: center"><button class="btn btn-primary btn-sm" (click)="add()">Agregar</button></div>
+
+                </form>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+
+<ng-template #ver let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Informacion del estudainte</h5>
+        <button class="close" aria-label="Close" (click)="modal.dismiss()"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="modal-body">
+        <label>Id:</label>
+        <input class="form-control" [(ngModel)]="id2" readonly>
+        <label>DNI:</label>
+        <input class="form-control" [(ngModel)]="dni2" ngbAutofocus>
+        <label>Last Name:</label>
+        <input class="form-control" [(ngModel)]="lastName2">
+        <label>First Name:</label>
+        <input class="form-control" [(ngModel)]="firstName2">
+        <label>Email:</label>
+        <input class="form-control" [(ngModel)]="email2">
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" (click)="modal.close()">Guardar Cambios</button>
+    </div>
+</ng-template>
